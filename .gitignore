@@ -1,3 +1,7 @@
 tmp
 logs
 test-result
+.classpath
+.project
+.settings/
+eclipse/
