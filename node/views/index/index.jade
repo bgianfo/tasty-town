@@ -1,0 +1,64 @@
+div(style='margin-left: auto; margin-right: auto; width: 500px; height: 300px')#map
+a(href="/add")
+script(type="text/javascript")
+    var map;
+
+    function setupMap() {
+    }
+
+    function autoSetup() {
+        if ( geoEnabled() ) {
+            console.log( "geo claims browser supported" );
+            navigator.geolocation.getCurrentPosition( centerMap, manualSetup );
+        } else {
+            console.log( "geo claims browser not supported" );
+            manualSetup();
+        }
+    }
+
+    function geoEnabled() {
+        return navigator.geolocation ? true : false;
+    }
+
+    function manualSetup() {
+        console.log("Location is not available");
+    }
+
+    function centerMap(loc) {
+        console.log("center Map called")
+        cord = loc.coords;
+        console.log( cord );
+
+        var center = new google.maps.LatLng(cord.latitude, cord.longitude);
+
+        var myOptions = {
+              zoom: 10,
+              center: center,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              streetViewControl: false,
+              mapTypeControl: false,
+        }
+        var canvas = document.getElementById("map");
+        map = new google.maps.Map(canvas,myOptions);
+
+        // Create marker
+        var marker = new google.maps.Marker({
+          map: map,
+          position: center,
+          title: 'Your Location'
+        });
+
+        // Add circle overlay and bind to marker
+        var circle = new google.maps.Circle({
+          map: map,
+          radius: 16093,    // 10 miles in metres
+          fillColor: '#AA0000'
+        });
+
+        circle.bindTo('center', marker, 'position');
+    }
+
+
+    $(document).ready(function(){
+        autoSetup();
+    });
