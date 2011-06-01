@@ -1,5 +1,13 @@
-div(style='margin-left: auto; margin-right: auto; width: 500px; height: 300px')#map
-a(href="/add")
+#map
+div(align="center")#navbar
+    a(href="/add",title="add")#addlink Add a new item
+
+
+#tastyitems
+    ul
+        - for ( var item in items )
+          li= item.title
+
 script(type="text/javascript")
     var map;
 
@@ -31,8 +39,6 @@ script(type="text/javascript")
         }
         var canvas = document.getElementById("map");
         map = new google.maps.Map(canvas,myOptions);
-
-
     }
 
     function centerMap(loc) {

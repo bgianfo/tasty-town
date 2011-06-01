@@ -1,12 +1,14 @@
 
-// Bring in includes 
+// Bring in includes
 var mongoq  = require("mongoq");
 var express = require("express");
+var log     = require('logging').from(__filename);
+
 
 // Setup MongoDB Connection
 var tastydb = mongoq("mongodb://localhost/tasty");
 var users = tastydb.collection("users");
-var items = tastydb.collection("users");
+var items = tastydb.collection("items");
 
 
 // Create and configure express server
@@ -40,6 +42,10 @@ app.get('/', function(req,res){
 });
 
 
+app.get('/add', function(req,res){
+    res.render('add');
+});
+
 app.get('/api/get/:lat/:lon/:rad?', function(req,res){
 });
 
@@ -48,13 +54,16 @@ app.post('/api/add/item/:user/:title/:content/:lat/:lon', function(req,res){
     var item = {
         title: req.params.title,
         details: req.params.content,
-        user: req.params.user
+        user: req.params.user,
+        loc: [ req.params.lon, req.params.lat ]
     };
 
     items.insert( item, function(err, doc) {
-        console.log( "Inserted:" + item );
+        log( "Inserted:"  );
+        log( doc );
     });
 });
 
+// Start the server
 app.listen(3000);
 
