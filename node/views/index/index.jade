@@ -22,6 +22,17 @@ script(type="text/javascript")
 
     function manualSetup() {
         console.log("Location is not available");
+        alert("Location is not available");
+
+        var myOptions = {
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              streetViewControl: false,
+              mapTypeControl: false,
+        }
+        var canvas = document.getElementById("map");
+        map = new google.maps.Map(canvas,myOptions);
+
+
     }
 
     function centerMap(loc) {
