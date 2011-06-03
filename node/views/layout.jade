@@ -1,8 +1,10 @@
-!!!
+!!! 5
 html
   head
     title Tasty Town
     link(rel="stylesheet", href="/css/style.css")
-    script(type="text/javascript", src="http://maps.google.com/maps/api/js?sensor=true")
+    - if ( typeof fetchMap != "undefined" && fetchMap )
+      script(type="text/javascript", src="http://maps.google.com/maps/api/js?sensor=true")
     script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
   body!= body
+

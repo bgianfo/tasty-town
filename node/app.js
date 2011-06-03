@@ -37,10 +37,10 @@ app.configure('production', function(){
 
 app.get('/', function(req,res){
     items.findItems({}, function(err,docs){
-        res.render('index', {items:docs});
+        log(docs);
+        res.render('index', {items:docs, fetchMap:true});
     });
 });
-
 
 app.get('/add', function(req,res){
     res.render('add');

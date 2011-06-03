@@ -1,14 +1,28 @@
-#map
-div(align="center")#navbar
-    a(href="/add",title="add")#addlink Add a new item
+#wrap
+    #header
+    #nav
+        #map
+            div(align="center")#navbar
+                a(href="/add",title="add")#addlink Add a new item
 
 
-#tastyitems
-    ul
-        - for ( var item in items )
-          li= item.title
+    #main
+        h2 Available Items
+        #tastyitems
+            ul#items
+                - each item in items
+                    li #{item.title} by #{item.user}
+    #sidebar
+        h2 Available Bids
+        #tastybids
+            ul
+                - each item in items
+                    li #{item.details} by #{item.user}
+    #footer
+        div(align="center")
+            p Copy Right Tasty Town 2011
 
-script(type="text/javascript")
+script
     var map;
 
     function setupMap() {
