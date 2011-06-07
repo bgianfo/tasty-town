@@ -1,10 +1,16 @@
-body {
-    background-color: #808080;
+#title {
+  font-family: 'Kranky', serif; 
+  font-size:68px;
 }
 
 #addlink {
+
 }
 
+#bannerImg {
+    vertical-align: middle;
+    height: 120px;
+}
 #navbar {
  margin-left: auto;
  margin-right: auto;
@@ -15,6 +21,9 @@ body {
  margin-right: auto;
  width: 750px;
  height: 300px;
+ -moz-border-radius: 20px;
+ -webkit-border-radius: 20px;
+ border: 0px solid white 
 }
 
 body,
@@ -22,16 +31,18 @@ html {
     margin:0;
     padding:0;
     color:#000;
-    background:#a7a09a;
+    background:#ffffff;
 }
+
 #wrap {
     width:750px;
     margin:0 auto;
-    background:#99c;
+    //background:#99c;
 }
 #header {
     padding:5px 10px;
-    background:#ddd;
+    background-image: url('/images/bg2.jpg');
+    background-repeat: repeat;
 }
 h1 {
     margin:0;
@@ -48,6 +59,9 @@ h1 {
     display:inline;
     margin:0;
     padding:0;
+}
+#search {
+    background:#999;
 }
 #main {
     float:left;

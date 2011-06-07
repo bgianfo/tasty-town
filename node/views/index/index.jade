@@ -1,10 +1,20 @@
 #wrap
-    #header
+    div(align="center")#header
+        div#title
+          img(src="/images/cupcake.png")#bannerImg
+          span Tasty Town
+          img(src="/images/mixer.png")#bannerImg
     #nav
-        #map
             div(align="center")#navbar
-                a(href="/add",title="add")#addlink Add a new item
+                a(href="Home",title="Go to the home page")#gohome 
+                a(href="/add",title="Add a new item")#addlink Add a new item
 
+    #map
+
+    div(align="center")#search
+
+        input(value="Item..")#searchbox
+        button Search
 
     #main
         h2 Available Items
@@ -20,9 +30,9 @@
                     li #{item.details} by #{item.user}
     #footer
         div(align="center")
-            p Copy Right Tasty Town 2011
+            p Copyright Tasty Town 2011
 
-script
+script(type="text/javascript")
     var map;
 
     function setupMap() {
@@ -91,5 +101,6 @@ script
 
 
     $(document).ready(function(){
+        $("select, input:checkbox, input:radio, input:file").uniform();
         autoSetup();
     });
