@@ -3,7 +3,7 @@
 // Bring in includes
 var mongoq  = require("mongoq");
 var express = require("express");
-var maxmind = require("maxmind");
+var geoip   = require("geoip");
 var log     = require('logging').from(__filename);
 
 
@@ -13,8 +13,7 @@ var users = tastydb.collection("users");
 var items = tastydb.collection("items");
 
 // Startup Maxmind database
-//var geoip = maxmind.DB();
-//var citydb = geoip.opendb("GeoLiteCity.dat");
+var citydb = new geoip.City('GeoLiteCity.dat');
 
 
 var PORT = 3000;
@@ -25,7 +24,7 @@ var app = express.createServer();
 app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
-    app.use(express.logger({ format: ':method :url' }));
+    app.use(express.logger({ format: "\033[90m:method\033[0m \033[36m:url\033[0m \033[90m:status :response-timems -> :res[Content-Type]\033[0m" }));
     app.use(app.router);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -46,7 +45,6 @@ app.configure('production', function(){
 // Application Routes
 
 app.get('/', function(req,res){
-    log(req);
     items.findItems({}, function(err,docs){
         res.render('index', {items:docs, fetchMap:true});
     });
@@ -61,13 +59,16 @@ app.get('/api/get/:lat/:lon/:rad?', function(req,res){
 });
 
 app.get("/api/location", function(req,res) {
-    /*
-    maxmind.record_by_address(req.connection.remoteAddress, function(rec){
-      if ( rec.latitude && rec.longitude ) {
-        res.send(rec);
+    var ip = res.connection.remoteAddress;
+    ip = (ip == "127.0.0.1") ? "71.181.230.149" : ip;
+
+    citydb.lookup(ip, function (err, data) {
+      if ( data !== null && data.latitude && data.longitude ) {
+        res.send(data);
+      } else {
+        res.send({});
       }
     });
-    */
 });
 
 app.post('/api/add/item/:user/:title/:content/:lat/:lon', function(req,res){
