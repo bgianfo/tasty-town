@@ -1,3 +1,5 @@
+#login-menu
+
 #wrap
     div(align="center")#header
         div#title
@@ -35,13 +37,11 @@
 script(type="text/javascript")
     var map;
 
-    function setupMap() {
-    }
-
     function autoSetup() {
         if ( geoEnabled() ) {
             console.log( "geo claims browser supported" );
-            navigator.geolocation.getCurrentPosition( centerMap, manualSetup );
+            var options = { enableHighAccuracy: true, timeout: 5 };
+            navigator.geolocation.getCurrentPosition( centerMap, manualSetup, options );
         } else {
             console.log( "geo claims browser not supported" );
             manualSetup();
@@ -56,13 +56,16 @@ script(type="text/javascript")
         console.log("Location is not available");
         alert("Location is not available");
 
-        var myOptions = {
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              streetViewControl: false,
-              mapTypeControl: false,
-        }
-        var canvas = document.getElementById("map");
-        map = new google.maps.Map(canvas,myOptions);
+        $.get( "/api/location", function(data) {
+            loc = {
+                     coords: {
+                        latitude: data.latitude,
+                        longitude: data.longitude
+                     }
+                  };
+            centerMap(loc);
+        }, "json");
+
     }
 
     function centerMap(loc) {

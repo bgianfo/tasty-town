@@ -1,5 +1,3 @@
-
-
 // Bring in includes
 var mongoq  = require("mongoq");
 var express = require("express");
@@ -15,7 +13,7 @@ var items = tastydb.collection("items");
 // Startup Maxmind database
 var citydb = new geoip.City('GeoLiteCity.dat');
 
-
+// Application Constants
 var PORT = 3000;
 
 // Create and configure express server
