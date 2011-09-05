@@ -1,0 +1,46 @@
+
+label Username:
+  input(name='user[name]')#user
+
+br/
+
+label Title:
+  input(name='title')#title
+
+br/
+
+label Lat: 
+  input(name='lat')#lat
+label Lon: 
+  input(name='lon')#lon
+
+br/
+label Content:
+    textarea#content
+
+
+input(type="button")#submit Submit
+
+script
+
+    $(document).ready(function(){
+
+        $("#submit").click(function(){
+
+            var user  = $("#user").val();
+            var title = $("#title").val();
+            var content = $("#content").val();
+            var lat = $("#lat").val();
+            var lon = $("#lon").val();
+
+            var url = "/api/add/item/" + user + "/" + title + "/" + content +
+            "/" + lat + "/" + lon;
+
+            $.post( url, function(data) {
+                console.log("get data");
+                console.log(data);
+            });
+        });
+
+    });
+
