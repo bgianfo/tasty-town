@@ -22,7 +22,7 @@ var app = express.createServer();
 app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
-    app.use(express.logger({ format: "\033[90m:method\033[0m \033[36m:url\033[0m \033[90m:status :response-timems -> :res[Content-Type]\033[0m" }));
+    app.use(express.logger({ format: "\033[90m:method\033[0m \033[36m:url\033[0m \033[90m:status -> :res[Content-Type]\033[0m" }));
     app.use(app.router);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -58,7 +58,7 @@ app.get('/api/get/:lat/:lon/:rad?', function(req,res){
 
 app.get("/api/location", function(req,res) {
     var ip = res.connection.remoteAddress;
-    ip = (ip == "127.0.0.1") ? "71.181.230.149" : ip;
+    ip = (ip == "127.0.0.1") ? "71.212.53.45" : ip;
 
     citydb.lookup(ip, function (err, data) {
       if ( data !== null && data.latitude && data.longitude ) {

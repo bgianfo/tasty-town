@@ -1,11 +1,10 @@
-{
-    "description": "A package using naive versioning",
-    "author": "Brian Gianforcaro <b.gianfo@gmail.com>",
-    "dependencies": {
-        "express": ">= 2.3.10",
-        "jade": ">= 0.11.0"
-        "geoip": ">= 0.4.0"
-        "logging": ">= 2.0.8"
-        "mongoq": ">= 0.0.4"
-    },
+{ "name": "tasty-town"
+    , "version": "0.0.1"
+    , "dependencies": {
+        "express": "2.4.6",
+        "jade": "0.15.4"
+        "geoip": "0.4.3"
+        "logging": "2.0.10"
+        "mongoq": "0.0.4"
+    }
 }
